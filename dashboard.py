@@ -1,3 +1,32 @@
+# At the very top of dashboard.py, before importing Streamlit
+import streamlit as st
+
+# Theme selection
+theme = st.sidebar.radio("Choose Theme", ["Light", "Dark"])
+
+if theme == "Dark":
+    st.set_page_config(
+        page_title="Customer Dashboard",
+        layout="wide",
+        initial_sidebar_state="expanded",
+        page_icon="📊",
+    )
+    st.markdown(
+        """
+        <style>
+        body {background-color: #0e1117; color: #FAFAFA;}
+        .stButton>button {background-color: #1f1f2e; color: #FAFAFA;}
+        </style>
+        """, unsafe_allow_html=True
+    )
+else:
+    st.set_page_config(
+        page_title="Customer Dashboard",
+        layout="wide",
+        initial_sidebar_state="expanded",
+        page_icon="📊",
+    )
+
 # dashboard.py
 import pandas as pd
 import numpy as np
