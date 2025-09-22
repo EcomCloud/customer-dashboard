@@ -113,7 +113,12 @@ cohort_data = filtered_df.groupby(['cohort_month','month']).agg({
     'is_churned':'mean'
 }).reset_index()
 
-cohort_data['period'] = ((cohort_data['month'] - cohort_data['cohort_month'])/np.timedelta64(1,'M')).round().astype(int)
+# Fixed month calculation (no np.timedelta64('M'))
+cohort_data['period'] = (
+    (cohort_data['month'].dt.year - cohort_data['cohort_month'].dt.year) * 12 +
+    (cohort_data['month'].dt.month - cohort_data['cohort_month'].dt.month)
+)
+
 cohort_pivot = cohort_data.pivot(index='cohort_month', columns='period', values='is_churned').fillna(0)
 
 fig2, ax2 = plt.subplots(figsize=(10,6))
@@ -133,4 +138,3 @@ st.download_button(
 )
 
 st.markdown("---")
-st.markdown("Dashboard created with ❤️ using **Streamlit**, **Plotly**, and **Seaborn**.")
