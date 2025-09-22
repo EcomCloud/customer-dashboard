@@ -16,6 +16,18 @@ st.set_page_config(
     initial_sidebar_state="expanded",
     page_icon="📊"
 )
+# -----------------------
+# Hide header & footer
+# -----------------------
+st.markdown(
+    """
+    <style>
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # -----------------------
 # Sidebar: Theme selector
